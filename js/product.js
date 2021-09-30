@@ -45,41 +45,59 @@ cardsFetch();
 // HTML element : button add to cart
 const toCartBtn = document.getElementById("addToCart");
 
-// fonction getCart pour aller chercher le cart et le stocker dans let cartItems
 function getCart() {
-  let itemsCart = [];
-  console.log("0 " + itemsCart);
-  if (localStorage.getItem("cart") != null) {
-    itemsCart = JSON.parse(localStorage.getItem("cart"));
-    console.log("1 " + itemsCart);
+  let items = [];
+  console.log(items);
+  if (localStorage.getItem("panier") != null) {
+    items = localStorage.getItem("panier");
   }
-  return itemsCart;
+  return items;
 }
 
-// fonction addCart pour ajouter une valeur au cart en passant par let cartItems
-function addCart(idTeddy) {
-  let itemsCart = getCart();
-  console.log("2 " + itemsCart);
-  if (itemsCart.length == 0) {
-    itemsCart[idTeddy] = 1;
-    console.log("2.5 " + itemsCart);
-  } else {
-    let blnTrouve = false;
-    for (let i = 0; i < itemsCart.length; i++) {
-      if (itemsCart.find(idTeddy)) {
-        itemsCart[idTeddy]++;
-        blnTrouve = true;
-      }
-    }
-    if (blnTrouve == false) {
-      itemsCart[idTeddy] = 1;
-    }
+function add2Cart(productId, color, qty) {
+  getCart();
+  let q;
+  let items = localStorage.getItem("panier");
+  if (items.length == 0) {
+    items = [productId, color, q++];
   }
-  localStorage.setItem("cart", JSON.stringify(itemsCart));
-  console.log("3 " + itemsCart);
 }
+
+// // fonction getCart pour aller chercher le cart et le stocker dans let cartItems
+// function getCart() {
+//   let itemsCart = [];
+//   console.log("0 " + itemsCart);
+//   if (localStorage.getItem("cart") != null) {
+//     itemsCart = JSON.parse(localStorage.getItem("cart"));
+//     console.log("1 " + itemsCart);
+//   }
+//   return itemsCart;
+// }
+
+// // fonction addCart pour ajouter une valeur au cart en passant par let cartItems
+// function addCart(idKanap) {
+//   let itemsCart = getCart();
+//   console.log("2 " + itemsCart);
+//   if (itemsCart.length == 0) {
+//     itemsCart[idKanap] = 1;
+//     console.log("2.5 " + itemsCart);
+//   } else {
+//     let blnTrouve = false;
+//     for (let i = 0; i < itemsCart.length; i++) {
+//       if (itemsCart.find(idKanap)) {
+//         itemsCart[idKanap]++;
+//         blnTrouve = true;
+//       }
+//     }
+//     if (blnTrouve == false) {
+//       itemsCart[idKanap] = 1;
+//     }
+//   }
+//   localStorage.setItem("cart", JSON.stringify(itemsCart));
+//   console.log("3 " + itemsCart);
+// }
 
 // au bouton toCartBtn, fonction addCart
 toCartBtn.addEventListener("click", () => {
-  addCart(id);
+  add2Cart(id);
 });
