@@ -47,33 +47,49 @@ const toCartBtn = document.getElementById("addToCart");
 
 function getCart() {
   let items = [];
-  console.log(items);
   if (localStorage.getItem("panier") != null) {
     items = JSON.parse(localStorage.getItem("panier"));
   }
   return items;
 }
 
-function add2Cart(productId, color, qty) {
+function matchId(productId) {
+  return productId === id;
+}
+
+function add2Cart(productId, qty, color) {
   let items = getCart();
   if (items.length == 0) {
-    items = [productId, color, qty];
+    items = [productId, qty, color];
   } else {
     let iFound = false;
     for (let i = 0; i < items.length; i++) {
-      if (items[i].find(productId)) {
+      if (items.find(matchId)) {
         items[qty] += qty;
         iFound = true;
       }
     }
     if (iFound == false) {
-      items = [productId, color, qty];
+      items += [productId, qty, color];
+      console.log(items);
     }
   }
   localStorage.setItem("panier", JSON.stringify(items));
 }
 
+function qtyValue() {
+  let qty = document.getElementById("quantity");
+  return qty.value;
+}
+
+function colorValue() {
+  let color = document.getElementById("colors");
+  return color.value;
+}
+
 // au bouton toCartBtn, fonction addCart
 toCartBtn.addEventListener("click", () => {
-  add2Cart(id);
+  let qty = qtyValue();
+  let color = colorValue();
+  add2Cart(id, qty, color);
 });
