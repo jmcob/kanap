@@ -4,7 +4,7 @@
 const str = window.location;
 const url = new URL(str);
 const id = url.searchParams.get("id");
-console.log("kanap idis " + id);
+console.log("kanap id is " + id);
 const objectURL = "http://localhost:3000/api/products/" + id;
 console.log("Fetch URL is " + objectURL);
 
@@ -54,19 +54,30 @@ function getCart() {
   return items;
 }
 
-// La fonction qui recupere l'id des kanap du panier si le panier est utilisé
-function checkId(productId) {
+// prototype de fonction pour recupere les quantité d'un produit donné dans le panier
+function checkIdAndColor(productId, color) {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
-    return productId === localStorage.getItem("panier", items[i]);
+    let pId = localStorage.getItem("panier", items[i][0]);
+    if (productId === pId) {
+      return color === localStorage.getItem("panier", items[i][1]);
+    }
   }
 }
-// prototype de fonction pour recupere les quantité d'un produit donné dans le panier
-// function getQ(productId) {
-//   let items = getCart();
-//   for
-// }
-
+// la fonction qui retourne la quantité de kanap deja dans le panier avec la bonne couleur, et rends le i en prime pour s'en servir plus tard
+function returnQ(productId, color) {
+  let items = getCart();
+  for (let i = 0; i < items.length; i++) {
+    let pId = localStorage.getItem("panier", items[i][0]);
+    if (productId === pId) {
+      let clr = localStorage.getItem("panier", items[i][1]);
+      if (color === clr) {
+        let q = localStorage.getItem("panier", items[i][2]);
+        return pId, clr, q, i;
+      }
+    }
+  }
+}
 // La fameuse fonction add2cart qui ajoute au panier sous conditions et dans l'ordre
 function add2Cart(productId, color, qty) {
   let items = getCart();
@@ -74,36 +85,29 @@ function add2Cart(productId, color, qty) {
     let pId = productId;
     let clr = color;
     let q = qty;
-    // items[pId] = productId;
-    // items[clr] = color;
-    // items[q] = qty;
-    let items = [pId, clr, q];
-
+    let items = [[pId, clr, q]];
+    localStorage.setItem("panier", JSON.stringify(items));
     console.log(items);
   } else {
     let iFound = false;
-    // for (let i = 0; i < items.length; i++) {
-    // const result = items.find(({ productId }) => productId === id);
-    // console.log(result);
-    if (items.find(checkId)) {
-      let q = gotQ;
+    if (items.find(checkIdAndColor)) {
+      returnQ(productId, color);
       iFound = true;
-      // }
+      q += qty;
+      items[i][2] = q;
+      console.log(items);
+      localStorage.setItem("panier", JSON.stringify(items));
     }
     if (iFound == false) {
       let pId = productId;
       let clr = color;
       let q = qty;
-      // items[pId] = productId;
-      // items[clr] = color;
-      // items[q] = qty;
       let newItems = [pId, clr, q];
       items.push(newItems);
+      localStorage.setItem("panier", JSON.stringify(items));
       console.log(items);
     }
   }
-  localStorage.setItem("panier", JSON.stringify(items));
-  console.log(items);
 }
 
 // LA fonction qui recupere la valeur du champs quantity dans le markup
