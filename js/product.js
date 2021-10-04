@@ -47,7 +47,7 @@ const toCartBtn = document.getElementById("addToCart");
 
 // la fameuse fonction get cart qui recupere le panier.
 function getCart() {
-  let items = [];
+  let items = [[]];
   if (localStorage.getItem("panier") != null) {
     items = JSON.parse(localStorage.getItem("panier"));
   }
@@ -86,6 +86,8 @@ function add2Cart(productId, color, qty) {
     let clr = color;
     let q = qty;
     let items = [[pId, clr, q]];
+    localStorage.setItem("panier", JSON.stringify(items));
+
     console.log(items);
   } else {
     let iFound = false;
