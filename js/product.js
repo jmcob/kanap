@@ -47,7 +47,7 @@ const toCartBtn = document.getElementById("addToCart");
 
 // la fameuse fonction get cart qui recupere le panier.
 function getCart() {
-  let items = [[]];
+  let items = [];
   if (localStorage.getItem("panier") != null) {
     items = JSON.parse(localStorage.getItem("panier"));
   }
@@ -82,9 +82,6 @@ function returnValues(productId, color) {
 // La fameuse fonction add2cart qui ajoute au panier sous conditions et dans l'ordre
 function add2Cart(productId, color, qty) {
   if (qty == 0) {
-    return;
-  }
-  if (color == null) {
     return;
   }
   let items = getCart();
