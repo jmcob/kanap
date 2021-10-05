@@ -73,7 +73,7 @@ function returnValues(productId, color) {
       let clr = localStorage.getItem("panier", items[i][1]);
       if (color === clr) {
         let q = localStorage.getItem("panier", items[i][2]);
-        return [pId, clr, q, i];
+        return [q, i];
       }
     }
   }
@@ -81,22 +81,26 @@ function returnValues(productId, color) {
 
 // La fameuse fonction add2cart qui ajoute au panier sous conditions et dans l'ordre
 function add2Cart(productId, color, qty) {
+  if (qty == 0) {
+    return;
+  }
+  if (color == null) {
+    return;
+  }
   let items = getCart();
   if (items.length == 0) {
     let pId = productId;
     let clr = color;
     let q = qty;
     let items = [[pId, clr, q]];
-    localStorage.setItem("panier", JSON.stringify(items));
-
     console.log(items);
   } else {
     let iFound = false;
     if (items.find(checkIdAndColor)) {
       returnValues(productId, color);
       iFound = true;
-      let q = returnValues[2];
-      let i = returnValues[3];
+      let q = returnValues[0];
+      let i = returnValues[1];
       console.log(q, i);
       q += qty;
       items[i][2] = q;
@@ -106,9 +110,6 @@ function add2Cart(productId, color, qty) {
       let pId = productId;
       let clr = color;
       let q = qty;
-      // items[pId] = productId;
-      // items[clr] = color;
-      // items[q] = qty;
       let newItems = [pId, clr, q];
       items.push(newItems);
       console.log(items);
