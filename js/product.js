@@ -93,7 +93,7 @@ function add2Cart(productId, color, qty) {
     for (let i = 0; i < items.length; i++) {
       if (productId === items[i][0] && color === items[i][1]) {
         found = true;
-        //parseFloat
+        //parseFloat parseInt
         items[i][2] += qty;
         console.log(items);
       }
