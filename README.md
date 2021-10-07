@@ -1,4 +1,4 @@
-# kanap / Projet 5 OpenClassrooms - JavaScript
+# kanap - Projet 5 OpenClassrooms - JavaScript
 
 Back-end fourni, HTML / CSS aussi, il manque la conception du JS dans ce projet à compléter.
 
