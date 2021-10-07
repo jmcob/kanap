@@ -19,35 +19,31 @@ let cardsFetch = function () {
       let items = getCart();
 
       for (let i = 0; i < items.length; i++) {
-        let id = items[i][0];
         for (let j = 0; j < data.length; j++) {
-          if ((data[i][1] = id)) {
-            cartSection.innerHTML = `<article class="cart__item" data-id="${id}">
+          if (data[j]._id == items[i][0]) {
+            cartSection.innerHTML += `<article class="cart__item" data-id="${items[i][0]}">
           <div class="cart__item__img">
-          <img src="${data[i].imageUrl}"></ alt="${data[i].altTxt}">`;
+          <img src="${data[j].imageUrl}"></ alt="${data[j].altTxt}">
+          </div>
+          <div class="cart__item__content">
+            <div class="cart__item__content__titlePrice">
+              <h2>${data[j].name}</h2>
+              <p>${data[j].price} €</p>
+            </div>
+            <div class="cart__item__content__settings">
+              <div class="cart__item__content__settings__quantity">
+                <p>Qté : </p>
+                <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${items[i][2]}">
+              </div>
+              <div class="cart__item__content__settings__delete">
+                <p id="deleteItem">Supprimer</p>
+              </div>
+            </div>
+          </div>
+        </article>`;
           }
         }
       }
-      // <!--  <article class="cart__item" data-id="{product-ID}">
-      //    <div class="cart__item__img">
-      //      <img src="../images/product01.jpg" alt="Photographie d'un canapé">
-      //    </div>
-      //    <div class="cart__item__content">
-      //      <div class="cart__item__content__titlePrice">
-      //        <h2>Nom du produit</h2>
-      //        <p>42,00 €</p>
-      //      </div>
-      //      <div class="cart__item__content__settings">
-      //        <div class="cart__item__content__settings__quantity">
-      //          <p>Qté : </p>
-      //          <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="42">
-      //        </div>
-      //        <div class="cart__item__content__settings__delete">
-      //          <p class="deleteItem">Supprimer</p>
-      //        </div>
-      //      </div>
-      //    </div>
-      //  </article> -->
     });
 };
 cardsFetch();
