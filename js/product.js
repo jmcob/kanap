@@ -78,7 +78,7 @@ function add2Cart(productId, color, qty) {
   localStorage.setItem("panier", JSON.stringify(items));
 }
 
-// LA fonction qui recupere la valeur du champs quantity dans le markup
+// La fonction qui recupere la valeur du champs quantity dans le markup
 function qtyValue() {
   let qty = document.getElementById("quantity");
   return qty.value;
