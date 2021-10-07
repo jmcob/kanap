@@ -1,3 +1,5 @@
+// Element HTML du cart
+const cartSection = document.getElementById("cart__items");
 // la fameuse fonction get cart qui recupere le panier.
 function getCart() {
   let items = [];
@@ -8,16 +10,17 @@ function getCart() {
   }
   return items;
 }
+
 // la fonction qui va chercher le json du backend
 let cardsFetch = function () {
   fetch("http://localhost:3000/api/products")
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      let cartSection = document.getElementById("cart__items");
 
       let items = getCart();
-
+      let qty = 0;
+      let price = 0;
       for (let i = 0; i < items.length; i++) {
         for (let j = 0; j < data.length; j++) {
           if (data[j]._id == items[i][0]) {
@@ -36,13 +39,24 @@ let cardsFetch = function () {
                 <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${items[i][2]}">
               </div>
               <div class="cart__item__content__settings__delete">
-                <p id="deleteItem">Supprimer</p>
+                <p class="deleteItem">Supprimer</p>
               </div>
             </div>
           </div>
         </article>`;
+            // total price (if qty)
+            price += data[j].price * items[i][2];
+            document.getElementById("totalPrice").innerHTML = price;
+            //fonction pour supprimer un item du storage
+            const deleteItem = document.querySelector("deleteItem");
+            deleteItem.addEventListener("click", () => {
+              localStorage.removeItem("panier", items[i]);
+            });
           }
         }
+        // total Quantity
+        qty += items[i][2];
+        document.getElementById("totalQuantity").innerHTML = qty;
       }
     });
 };
