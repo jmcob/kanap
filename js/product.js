@@ -62,21 +62,17 @@ function add2Cart(productId, color, qty) {
   let items = getCart();
   if (items.length == 0) {
     items = [[productId, color, qty]];
-    console.log(items);
   } else {
     let found = false;
     for (let i = 0; i < items.length; i++) {
       if (productId === items[i][0] && color === items[i][1]) {
         found = true;
-        //parseFloat parseInt
         items[i][2] += qty;
-        console.log(items);
       }
     }
     if (found == false) {
       let item = [productId, color, qty];
       items.push(item);
-      console.log(items);
     }
   }
   localStorage.setItem("panier", JSON.stringify(items));
