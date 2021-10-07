@@ -39,9 +39,9 @@ let cardsFetch = function () {
 };
 cardsFetch();
 
-//////////
-// cart //
-//////////
+//////////////////
+// add to cart //
+////////////////
 // HTML element : button add to cart
 const toCartBtn = document.getElementById("addToCart");
 
