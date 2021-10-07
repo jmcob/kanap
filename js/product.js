@@ -54,31 +54,6 @@ function getCart() {
   return items;
 }
 
-// prototype de fonction pour recupere les quantité d'un produit donné dans le panier
-// function checkIdAndColor(productId, color) {
-//   let items = getCart();
-//   for (let i = 0; i < items.length; i++) {
-//     let pId = localStorage.getItem("panier", items[i][0]);
-//     if (productId == pId) {
-//       return color === localStorage.getItem("panier", items[i][1]);
-//     }
-//   }
-// }
-// // la fonction qui retourne la quantité de kanap deja dans le panier avec la bonne couleur, sa quantité, et rends le i en prime pour s'en servir plus tard
-// function returnValues(productId, color) {
-//   let items = getCart();
-//   for (let i = 0; i < items.length; i++) {
-//     let pId = localStorage.getItem("panier", items[i][0]);
-//     if (productId === pId) {
-//       let clr = localStorage.getItem("panier", items[i][1]);
-//       if (color === clr) {
-//         let q = localStorage.getItem("panier", items[i][2]);
-//         return [q, i];
-//       }
-//     }
-//   }
-// }
-
 // La fameuse fonction add2cart qui ajoute au panier sous conditions et dans l'ordre
 function add2Cart(productId, color, qty) {
   if (qty == 0) {
@@ -121,7 +96,7 @@ function colorValue() {
 
 // au bouton toCartBtn, fonction addCart qui active les autres fonction au click
 toCartBtn.addEventListener("click", () => {
-  let qty = qtyValue();
+  let qty = parseInt(qtyValue());
   let color = colorValue();
   add2Cart(id, color, qty);
 });
