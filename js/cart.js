@@ -52,13 +52,12 @@ let cardsFetch = function () {
         // total Quantity
         qty += items[i][2];
         document.getElementById("totalQuantity").innerHTML = qty;
+        //fonction pour supprimer un item du storage
+        const deleteItem = document.getElementsByClassName("deleteItem");
+        deleteItem[i].addEventListener("click", () => {
+          localStorage.removeItem("panier");
+        });
       }
     });
 };
 cardsFetch();
-
-//fonction pour supprimer un item du storage
-const deleteItem = document.querySelector("deleteItem");
-deleteItem.addEventListener("click", () => {
-  localStorage.removeItem("panier");
-});
