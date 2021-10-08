@@ -47,11 +47,6 @@ let cardsFetch = function () {
             // total price (if qty)
             price += data[j].price * items[i][2];
             document.getElementById("totalPrice").innerHTML = price;
-            //fonction pour supprimer un item du storage
-            const deleteItem = document.querySelector("deleteItem");
-            deleteItem.addEventListener("click", () => {
-              localStorage.removeItem("panier", items[i]);
-            });
           }
         }
         // total Quantity
@@ -61,3 +56,9 @@ let cardsFetch = function () {
     });
 };
 cardsFetch();
+
+//fonction pour supprimer un item du storage
+const deleteItem = document.querySelector("deleteItem");
+deleteItem.addEventListener("click", () => {
+  localStorage.removeItem("panier");
+});
