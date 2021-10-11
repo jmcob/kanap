@@ -6,7 +6,7 @@ function getCart() {
   if (localStorage.getItem("panier") != null) {
     items = JSON.parse(localStorage.getItem("panier"));
   } else {
-    cartSection.innerHTML = "Votre panier est vide";
+    cartSection.innerHTML = `<article class="cart__item" id="${i}"><p>Votre panier est vide</p>`;
   }
   return items;
 }
@@ -17,14 +17,13 @@ let cardsFetch = function () {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-
       let items = getCart();
       let qty = 0;
       let price = 0;
       for (let i = 0; i < items.length; i++) {
         for (let j = 0; j < data.length; j++) {
           if (data[j]._id == items[i][0]) {
-            cartSection.innerHTML += `<article class="cart__item" data-id="${items[i][0]}">
+            cartSection.innerHTML += `<article class="cart__item" id="${i}" data-id="${items[i][0]}">
           <div class="cart__item__img">
           <img src="${data[j].imageUrl}"></ alt="${data[j].altTxt}">
           </div>
@@ -52,11 +51,14 @@ let cardsFetch = function () {
         // total Quantity
         qty += items[i][2];
         document.getElementById("totalQuantity").innerHTML = qty;
-        //fonction pour supprimer un item du storage
+        //fonction pour supprimer un item du storage et changer son HTML
         const deleteItem = document.getElementsByClassName("deleteItem");
         deleteItem[i].addEventListener("click", () => {
-          let deleted = items.splice(i, 1);
+          let deletedItem = items.splice(i, 1);
           localStorage.setItem("panier", JSON.stringify(items));
+          document.getElementById(
+            i
+          ).innerHTML = `<article class="cart__item" id="${i}"><p>Kanap supprimé du panier !</p>`;
         });
       }
     });
