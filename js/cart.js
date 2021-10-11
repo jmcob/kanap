@@ -55,7 +55,8 @@ let cardsFetch = function () {
         //fonction pour supprimer un item du storage
         const deleteItem = document.getElementsByClassName("deleteItem");
         deleteItem[i].addEventListener("click", () => {
-          localStorage.removeItem("panier");
+          let deleted = items.splice(i, 1);
+          localStorage.setItem("panier", JSON.stringify(items));
         });
       }
     });
