@@ -6,7 +6,7 @@ function getCart() {
   if (localStorage.getItem("panier") != null) {
     items = JSON.parse(localStorage.getItem("panier"));
   } else {
-    cartSection.innerHTML = `<article class="cart__item" id="${i}"><p>Votre panier est vide</p>`;
+    cartSection.innerHTML = `<article class="cart__item"><p>Votre panier est vide</p>`;
   }
   return items;
 }
@@ -23,7 +23,7 @@ let cardsFetch = function () {
       for (let i = 0; i < items.length; i++) {
         for (let j = 0; j < data.length; j++) {
           if (data[j]._id == items[i][0]) {
-            cartSection.innerHTML += `<article class="cart__item" id="${i}" data-id="${items[i][0]}">
+            cartSection.innerHTML += `<article class="cart__item"  data-id="${items[i][0]}">
           <div class="cart__item__img">
           <img src="${data[j].imageUrl}"></ alt="${data[j].altTxt}">
           </div>
@@ -43,6 +43,7 @@ let cardsFetch = function () {
             </div>
           </div>
         </article>`;
+
             // total price (if qty)
             price += data[j].price * items[i][2];
             document.getElementById("totalPrice").innerHTML = price;
@@ -51,16 +52,24 @@ let cardsFetch = function () {
         // total Quantity
         qty += items[i][2];
         document.getElementById("totalQuantity").innerHTML = qty;
-        //fonction pour supprimer un item du storage et changer son HTML
-        const deleteItem = document.getElementsByClassName("deleteItem");
-        deleteItem[i].addEventListener("click", () => {
-          let deletedItem = items.splice(i, 1);
-          localStorage.setItem("panier", JSON.stringify(items));
-          document.getElementById(
-            i
-          ).innerHTML = `<article class="cart__item" id="${i}"><p>Kanap supprimé du panier !</p>`;
-        });
       }
     });
 };
+
+//fonction pour supprimer un item du storage et changer son HTML
+
+const article = document.getElementsByName("article");
+const deleteItem = document.getElementsByClassName("deleteItem");
+for (let i = 0; i < article.length; i++) {
+  deleteItem[i].addEventListener("click", () => {
+    let items = getCart();
+    let id = article[i].dataset.id;
+    let deletedItem = items.splice(i, 1);
+    localStorage.setItem("panier", JSON.stringify(items));
+    document.getElementsByClassName(
+      cart__item
+    ).innerHTML = `<article class="cart__item"><p>Kanap supprimé du panier !</p>`;
+  });
+}
+
 cardsFetch();
