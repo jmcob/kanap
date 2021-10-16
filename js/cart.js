@@ -23,7 +23,7 @@ let cardsFetch = function () {
       for (let i = 0; i < items.length; i++) {
         for (let j = 0; j < data.length; j++) {
           if (data[j]._id == items[i][0]) {
-            cartSection.innerHTML += `<article class="cart__item"  data-id="${items[i][0]}">
+            cartSection.innerHTML += `<article class="cart__item"  id="${items[i][0]}" data-id="${items[i][0]}" data-color="${items[i][1]}"">
           <div class="cart__item__img">
           <img src="${data[j].imageUrl}"></ alt="${data[j].altTxt}">
           </div>
@@ -58,17 +58,23 @@ let cardsFetch = function () {
 
 //fonction pour supprimer un item du storage et changer son HTML
 
-const article = document.getElementsByName("article");
+const article = document.getElementsByTagName("article");
 const deleteItem = document.getElementsByClassName("deleteItem");
+
 for (let i = 0; i < article.length; i++) {
-  deleteItem[i].addEventListener("click", () => {
+  deleteItem.addEventListener("click", () => {
     let items = getCart();
     let id = article[i].dataset.id;
-    let deletedItem = items.splice(i, 1);
-    localStorage.setItem("panier", JSON.stringify(items));
-    document.getElementsByClassName(
-      cart__item
-    ).innerHTML = `<article class="cart__item"><p>Kanap supprimé du panier !</p>`;
+    let color = article[i].dataset.color;
+    for (let j = 0; j < items.length; j++) {
+      if (id == items[j][0] && color == items[j][1]) {
+        let deletedItem = items.splice(j, 1);
+        localStorage.setItem("panier", JSON.stringify(items));
+        document.getElementsByClass(
+          cart__item[i]
+        ).innerHTML = `<p>Kanap supprimé du panier !</p>`;
+      }
+    }
   });
 }
 
