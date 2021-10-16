@@ -39,11 +39,9 @@ let cardsFetch = function () {
 };
 cardsFetch();
 
-//////////
-// cart //
-//////////
-// HTML element : button add to cart
-const toCartBtn = document.getElementById("addToCart");
+//////////////////
+// add to cart //
+////////////////
 
 // la fameuse fonction get cart qui recupere le panier.
 function getCart() {
@@ -90,6 +88,8 @@ function colorValue() {
   return color.value;
 }
 
+// HTML element : button add to cart
+const toCartBtn = document.getElementById("addToCart");
 // au bouton toCartBtn, fonction addCart qui active les autres fonction au click
 toCartBtn.addEventListener("click", () => {
   let qty = parseInt(qtyValue());
