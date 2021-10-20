@@ -29,6 +29,7 @@ function fetchIdData() {
 // let qty = 0;
 // qty += items[i][2];
 // document.getElementById("totalQuantity").innerHTML = qty;
+
 //fonction pour supprimer un item du storage et changer son HTML
 
 const article = document.getElementsByTagName("article");
@@ -43,3 +44,4 @@ const deleteItem = document.getElementsByClassName("deleteItem");
 //   return false;
 // }
 fetchIdData();
+
