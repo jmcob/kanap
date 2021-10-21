@@ -55,6 +55,7 @@ function deleteItem() {
   for (let i = 0; i < items.length; i++) {
     let removedItem = items.splice(i, 1);
     localStorage.setItem("panier", JSON.stringify(items));
+    window.location.reload();
   }
 }
 fetchIdData();
