@@ -32,8 +32,8 @@ for (let i = 0; i < article.length; i++) {
     }
   });
 }
-
-// DeleteItem;
+// votre panier est vide
+// DeleteItem; ok
 // item quantity change;
 // Form : prenom, nom, adresse, ville, mail, submit
-onclick = "let deletedItem = items.splice(i, 1);";
+// onchange

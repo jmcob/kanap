@@ -1,6 +1,13 @@
 // Element HTML du cart
 const cartSection = document.getElementById("cart__items");
-window.deleteItem = deleteItem;
+function deleteItem() {
+  let items = JSON.parse(localStorage.getItem("panier"));
+  for (let i = 0; i < items.length; i++) {
+    let removedItem = items.splice(i, 1);
+    localStorage.setItem("panier", JSON.stringify(items));
+    window.location.reload();
+  }
+}
 
 // la fonction fetch qui recupere le panier, les données a fetcher, et les écrit en HTML
 function fetchIdData() {
@@ -10,8 +17,6 @@ function fetchIdData() {
 
   if (localStorage.getItem("panier") != null) {
     items = JSON.parse(localStorage.getItem("panier"));
-  } else {
-    cartSection.innerHTML = `<article class="cart__item"><p>Votre panier est vide</p>`;
   }
   for (let i = 0; i < items.length; i++) {
     let id = items[i][0];
@@ -19,7 +24,6 @@ function fetchIdData() {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         cartSection.innerHTML += `<article class="cart__item" data-id="${id}" data-color="${items[i][1]}">
                 <div class="cart__item__img">
                   <img src="${data.imageUrl}" alt="${data.altTxt}">
@@ -50,12 +54,8 @@ function fetchIdData() {
     document.getElementById("totalQuantity").innerHTML = qty;
   }
 }
-function deleteItem() {
+
+function quantity() {
   let items = JSON.parse(localStorage.getItem("panier"));
-  for (let i = 0; i < items.length; i++) {
-    let removedItem = items.splice(i, 1);
-    localStorage.setItem("panier", JSON.stringify(items));
-    window.location.reload();
-  }
 }
 fetchIdData();
