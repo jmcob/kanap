@@ -36,4 +36,4 @@ for (let i = 0; i < article.length; i++) {
 // DeleteItem; ok
 // item quantity change;
 // Form : prenom, nom, adresse, ville, mail, submit
-// onchange
+// onchange qty(id, color, this.value)

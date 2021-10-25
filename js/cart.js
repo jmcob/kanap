@@ -1,7 +1,45 @@
+//////////////////
+// add to cart //
+////////////////
+
+// la fameuse fonction get cart qui recupere le panier.
+function getCart() {
+  let items = [];
+  if (localStorage.getItem("panier") != null) {
+    items = JSON.parse(localStorage.getItem("panier"));
+  }
+  return items;
+}
+
+// La fameuse fonction add2cart qui ajoute au panier sous conditions et dans l'ordre
+function add2Cart(productId, color, qty) {
+  if (qty == 0) {
+    return;
+  }
+  let items = getCart();
+  if (items.length == 0) {
+    items = [[productId, color, qty]];
+  } else {
+    let found = false;
+    for (let i = 0; i < items.length; i++) {
+      if (productId === items[i][0] && color === items[i][1]) {
+        found = true;
+        items[i][2] += qty;
+      }
+    }
+    if (found == false) {
+      let item = [productId, color, qty];
+      items.push(item);
+    }
+  }
+  localStorage.setItem("panier", JSON.stringify(items));
+}
+
 // Element HTML du cart
 const cartSection = document.getElementById("cart__items");
+// Bouton deleteItem du cart
 function deleteItem() {
-  let items = JSON.parse(localStorage.getItem("panier"));
+  let items = getCart();
   for (let i = 0; i < items.length; i++) {
     let removedItem = items.splice(i, 1);
     localStorage.setItem("panier", JSON.stringify(items));
@@ -11,13 +49,10 @@ function deleteItem() {
 
 // la fonction fetch qui recupere le panier, les données a fetcher, et les écrit en HTML
 function fetchIdData() {
-  let items = [];
+  let items = getCart();
   let qty = 0;
   let price = 0;
 
-  if (localStorage.getItem("panier") != null) {
-    items = JSON.parse(localStorage.getItem("panier"));
-  }
   for (let i = 0; i < items.length; i++) {
     let id = items[i][0];
     let url = "http://localhost:3000/api/products/" + id;
