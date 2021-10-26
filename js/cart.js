@@ -46,6 +46,16 @@ function deleteItem() {
     window.location.reload();
   }
 }
+function quantity(id, color, qty) {
+  let items = getCart();
+  for (let i = 0; i < items.length; i++) {
+    if (id === items[i][0] && color === items[i][1]) {
+      items[i][2] = qty;
+    }
+    localStorage.setItem("panier", JSON.stringify(items));
+    window.location.reload();
+  }
+}
 
 // la fonction fetch qui recupere le panier, les données a fetcher, et les écrit en HTML
 function fetchIdData() {
@@ -55,11 +65,12 @@ function fetchIdData() {
 
   for (let i = 0; i < items.length; i++) {
     let id = items[i][0];
+    let color = items[i][1];
     let url = "http://localhost:3000/api/products/" + id;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        cartSection.innerHTML += `<article class="cart__item" data-id="${id}" data-color="${items[i][1]}">
+        cartSection.innerHTML += `<article class="cart__item" data-id="${id}" data-color="${color}">
                 <div class="cart__item__img">
                   <img src="${data.imageUrl}" alt="${data.altTxt}">
                 </div>
@@ -71,7 +82,7 @@ function fetchIdData() {
                   <div class="cart__item__content__settings">
                     <div class="cart__item__content__settings__quantity">
                       <p>Qté : </p>
-                      <input type="number" class="itemQuantity" name="itemQuantity" min="1" max="100" value="${items[i][2]}">
+                      <input type="number" class="itemQuantity" name="itemQuantity" onchange="quantity(${id}, ${color}, ${this.value})" min="1" max="100" value="${items[i][2]}">
                     </div>
                     <div class="cart__item__content__settings__delete">
                       <p class="deleteItem" onclick="deleteItem()">Supprimer</p>
@@ -90,7 +101,4 @@ function fetchIdData() {
   }
 }
 
-function quantity() {
-  let items = JSON.parse(localStorage.getItem("panier"));
-}
 fetchIdData();

@@ -9,7 +9,7 @@ const objectURL = "http://localhost:3000/api/products/" + id;
 console.log("Fetch URL is " + objectURL);
 
 /////////
-// Fetching data from backend & DOM
+// Fetching data from backend & constructing DOM
 /////////
 let cardsFetch = function () {
   fetch(objectURL)
@@ -39,6 +39,9 @@ let cardsFetch = function () {
 };
 cardsFetch();
 
+////////
+//Getting HTML values from HTML
+/////////
 // La fonction qui recupere la valeur du champs quantity dans le markup
 function qtyValue() {
   let qty = document.getElementById("quantity");
