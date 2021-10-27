@@ -17,4 +17,4 @@ for (let i = 0; i < article.length; i++) {
 }
 // votre panier est vide / kanap supprimé
 
-// Form : prenom, nom, adresse, ville, mail, submit
+// Form : submit

@@ -105,46 +105,43 @@ function fetchIdData() {
 ////////////////////////////////////////////////////////////////
 // Form elements
 ////////////////////////////////////////////////////////////////
+
+//// REGEXs (no regex for address form)
 // email
 const emailErrorMsg = document.getElementById("emailErrorMsg");
 function validateEmail(email) {
-  const regex =
+  const regexMail =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (regex.test(email) == false) {
+  if (regexMail.test(email) == false) {
     emailErrorMsg.innerHTML = "Entrez une adresse e-mail valide.";
   }
 }
-// console.log(validateEmail("jmcob@pm.me"));
-// console.log(validateEmail("jmcob@pmme"));
-
+// simple regex for names 1-50 characters
+const regexName = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
 // first name
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-function validateFirstName() {
-  if (/^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(form.firstName.value)) {
-    return true;
+function validateFirstName(firstName) {
+  if (regexName.test(firstName) == false) {
+    firstNameErrorMsg.innerHTML =
+      "Entrez un prénom valideentre 1 et 50 caratères.";
   }
-  firstNameErrorMsg.innerHTML = "Entrez un prénom valide.";
-  return false;
 }
 
 // last name
 const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
-function validateLastName() {
-  if (/^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(form.lastName.value)) {
-    return true;
+function validateLastName(lastName) {
+  if (regexName.test(lastName) == false) {
+    lastNameErrorMsg.innerHTML = "Entrez un nom valideentre 1 et 50 caratères.";
   }
-  lastNameErrorMsg.innerHTML = "Entrez un nom valide.";
-  return false;
 }
 
-// City
+// city
 const cityErrorMsg = document.getElementById("cityErrorMsg");
-function validateCity() {
-  if (/^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(form.city.value)) {
-    return true;
+function validateCity(city) {
+  if (regexName.test(city) == false) {
+    cityErrorMsg.innerHTML =
+      "Entrez une commune valide entre 1 et 50 caratères.";
   }
-  cityErrorMsg.innerHTML = "Entrez une commune valide.";
-  return false;
 }
 
 fetchIdData();
