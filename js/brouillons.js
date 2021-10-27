@@ -1,12 +1,3 @@
-// const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
-// function ValidateEmail(mail) {
-//   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value)) {
-//     return true;
-//   }
-//   firstNameErrorMsg.innerHTML = `Entrez une adresse email valide s'il vous plait`;
-//   return false;
-// }
-
 //fonction pour supprimer un item du storage et changer son HTML
 for (let i = 0; i < article.length; i++) {
   deleteItem.addEventListener("click", () => {
@@ -24,10 +15,6 @@ for (let i = 0; i < article.length; i++) {
     }
   });
 }
-// votre panier est vide
-// kanap supprimé message
-// item quantity change;
+// votre panier est vide / kanap supprimé
 
 // Form : prenom, nom, adresse, ville, mail, submit
-
-onchange qty(id, color, this.value)

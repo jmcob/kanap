@@ -1,6 +1,6 @@
 //////////////////
-// add to cart //
-////////////////
+//    cart      //
+//////////////////
 
 // la fameuse fonction get cart qui recupere le panier utilisée plusieurs fois dans la page
 function getCart() {
@@ -46,6 +46,7 @@ function deleteItem() {
     window.location.reload();
   }
 }
+// La fonction qui récupere la veleur modifiée sur la page de la quantité d'un canap et qui met a jour le local storage.
 function changeQuantity(id, color, qty) {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -57,7 +58,7 @@ function changeQuantity(id, color, qty) {
   }
 }
 
-// la fonction fetch qui recupere le panier, les données a fetcher, et les écrit en HTML
+// la fonction fetch qui recupere le panier, les data a recuperer en JSON, et les écrit en HTML
 function fetchIdData() {
   let items = getCart();
   let qty = 0;
@@ -99,6 +100,19 @@ function fetchIdData() {
     qty += items[i][2];
     document.getElementById("totalQuantity").innerHTML = qty;
   }
+}
+
+////////////////////////////////////////////////////////////////
+// Form elements
+////////////////////////////////////////////////////////////////
+
+const emailErrorMsg = document.getElementById("emailErrorMsg");
+function ValidateEmail(mail) {
+  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value)) {
+    return true;
+  }
+  emailErrorMsg.innerHTML = `Entrez une adresse email valide s'il vous plait`;
+  return false;
 }
 
 fetchIdData();
