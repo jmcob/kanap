@@ -6,14 +6,6 @@
 //   firstNameErrorMsg.innerHTML = `Entrez une adresse email valide s'il vous plait`;
 //   return false;
 // }
-// total price (if qty)
-// let price = 0;
-// price += data[j].price * items[i][2];
-// document.getElementById("totalPrice").innerHTML = price;
-// total Quantity
-// let qty = 0;
-// qty += items[i][2];
-// document.getElementById("totalQuantity").innerHTML = qty;
 
 //fonction pour supprimer un item du storage et changer son HTML
 for (let i = 0; i < article.length; i++) {
@@ -32,8 +24,10 @@ for (let i = 0; i < article.length; i++) {
     }
   });
 }
-
-// DeleteItem;
+// votre panier est vide
+// kanap supprimé message
 // item quantity change;
+
 // Form : prenom, nom, adresse, ville, mail, submit
-onclick = "let deletedItem = items.splice(i, 1);";
+
+onchange qty(id, color, this.value)
