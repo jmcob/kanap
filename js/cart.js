@@ -1,8 +1,8 @@
-//////////////////
-//    cart      //
-//////////////////
+//////////////////////////
+//    cart elements     //
+//////////////////////////
 
-// la fameuse fonction get cart qui recupere le panier utilisée plusieurs fois dans la page
+// la fameuse fonction "getCart" qui recupere le panier ; utilisée plusieurs fois dans la page
 function getCart() {
   let items = [];
   if (localStorage.getItem("panier") != null) {
@@ -37,7 +37,7 @@ function add2Cart(productId, color, qty) {
 
 // Element HTML du cart
 const cartSection = document.getElementById("cart__items");
-// Bouton deleteItem du cart
+// Fonction du bouton deleteItem du cart, qui supprime une entrée du local storage
 function deleteItem() {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -46,7 +46,7 @@ function deleteItem() {
     window.location.reload();
   }
 }
-// La fonction qui récupere la veleur modifiée sur la page de la quantité d'un canap et qui met a jour le local storage.
+// La fonction qui récupere la veleur modifiée sur la page de la quantité d'un kanap, et qui met a jour le local storage.
 function changeQuantity(id, color, qty) {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -91,7 +91,7 @@ function fetchIdData() {
                   </div>
                 </div>
               </article>`;
-        // total price (if qty)
+        // total price (if qty (items[i][2]))
         price += data.price * items[i][2];
         document.getElementById("totalPrice").innerHTML = price;
       });
@@ -105,13 +105,45 @@ function fetchIdData() {
 ////////////////////////////////////////////////////////////////
 // Form elements
 ////////////////////////////////////////////////////////////////
-
+// email
 const emailErrorMsg = document.getElementById("emailErrorMsg");
-function ValidateEmail(mail) {
-  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email.value)) {
+function validateEmail(email) {
+  const regex =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (regex.test(email) == false) {
+    emailErrorMsg.innerHTML = "Entrez une adresse e-mail valide.";
+  }
+}
+// console.log(validateEmail("jmcob@pm.me"));
+// console.log(validateEmail("jmcob@pmme"));
+
+// first name
+const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+function validateFirstName() {
+  if (/^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(form.firstName.value)) {
     return true;
   }
-  emailErrorMsg.innerHTML = `Entrez une adresse email valide s'il vous plait`;
+  firstNameErrorMsg.innerHTML = "Entrez un prénom valide.";
+  return false;
+}
+
+// last name
+const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+function validateLastName() {
+  if (/^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(form.lastName.value)) {
+    return true;
+  }
+  lastNameErrorMsg.innerHTML = "Entrez un nom valide.";
+  return false;
+}
+
+// City
+const cityErrorMsg = document.getElementById("cityErrorMsg");
+function validateCity() {
+  if (/^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i.test(form.city.value)) {
+    return true;
+  }
+  cityErrorMsg.innerHTML = "Entrez une commune valide.";
   return false;
 }
 
