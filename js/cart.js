@@ -2,7 +2,7 @@
 // add to cart //
 ////////////////
 
-// la fameuse fonction get cart qui recupere le panier.
+// la fameuse fonction get cart qui recupere le panier utilisée plusieurs fois dans la page
 function getCart() {
   let items = [];
   if (localStorage.getItem("panier") != null) {
@@ -46,7 +46,7 @@ function deleteItem() {
     window.location.reload();
   }
 }
-function quantity(id, color, qty) {
+function changeQuantity(id, color, qty) {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
     if (id === items[i][0] && color === items[i][1]) {
@@ -82,7 +82,7 @@ function fetchIdData() {
                   <div class="cart__item__content__settings">
                     <div class="cart__item__content__settings__quantity">
                       <p>Qté : </p>
-                      <input type="number" class="itemQuantity" name="itemQuantity" onchange="quantity(${id}, ${color}, ${this.value})" min="1" max="100" value="${items[i][2]}">
+                      <input type="number" class="itemQuantity" name="itemQuantity" onchange="changeQuantity('${id}', '${color}', this.value)" min="1" max="100" value="${items[i][2]}">
                     </div>
                     <div class="cart__item__content__settings__delete">
                       <p class="deleteItem" onclick="deleteItem()">Supprimer</p>
