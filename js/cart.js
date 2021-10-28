@@ -106,7 +106,7 @@ function fetchIdData() {
 // Form elements
 ////////////////////////////////////////////////////////////////
 
-//// REGEXs (no regex for address form)
+//// REGEXs (no regex for address form nor first name, last name or city)
 // email
 const emailErrorMsg = document.getElementById("emailErrorMsg");
 function validateEmail(email) {
@@ -114,16 +114,20 @@ function validateEmail(email) {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (regexMail.test(email) == false) {
     emailErrorMsg.innerHTML = "Entrez une adresse e-mail valide.";
+  } else {
+    emailErrorMsg.innerHTML = null;
   }
 }
-// simple regex for names 1-50 characters
-const regexName = /^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/i;
+// simple regex for names
+const regexName = /^[\p{L}'][ \p{L}'-]*[\p{L}]$/u;
 // first name
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 function validateFirstName(firstName) {
   if (regexName.test(firstName) == false) {
     firstNameErrorMsg.innerHTML =
-      "Entrez un prénom valideentre 1 et 50 caratères.";
+      "Entrez un prénom valide entre 1 et 50 caratères.";
+  } else {
+    firstNameErrorMsg.innerHTML = null;
   }
 }
 
@@ -131,7 +135,10 @@ function validateFirstName(firstName) {
 const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
 function validateLastName(lastName) {
   if (regexName.test(lastName) == false) {
-    lastNameErrorMsg.innerHTML = "Entrez un nom valideentre 1 et 50 caratères.";
+    lastNameErrorMsg.innerHTML =
+      "Entrez un nom valide entre 1 et 50 caratères.";
+  } else {
+    lastNameErrorMsg.innerHTML = null;
   }
 }
 
@@ -141,7 +148,47 @@ function validateCity(city) {
   if (regexName.test(city) == false) {
     cityErrorMsg.innerHTML =
       "Entrez une commune valide entre 1 et 50 caratères.";
+  } else {
+    cityErrorMsg.innerHTML = null;
   }
 }
+
+// POST request
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
+const city = document.getElementById("city");
+const address = document.getElementById("address");
+const email = document.getElementById("email");
+const orderId = Math.floor(Math.random() * 1000000000000000); // order Id
+
+function send(e) {
+  e.preventDefault();
+  fetch("http://localhost:3000/api/products/order", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      firstName: firstName,
+      lastName: lastName,
+      city: city,
+      address: address,
+      email: email,
+      orderId: orderId,
+    }),
+  })
+    .then(function (res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .then(function (value) {
+      console.log(value.postData.text);
+    });
+}
+
+// Order ID
+// get a random number id
 
 fetchIdData();

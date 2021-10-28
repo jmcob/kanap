@@ -100,14 +100,19 @@
               </p>
             </div>
             <div class="cart__order">
-              <form name="form" method="get" class="cart__order__form">
+              <form
+                name="form"
+                method="get"
+                class="cart__order__form"
+                onsubmit="send()"
+              >
                 <div class="cart__order__form__question">
                   <label for="firstName">Prénom: </label>
                   <input
                     type="text"
                     name="firstName"
                     id="firstName"
-                    onchange="validateFirstName()"
+                    oninput="validateFirstName()"
                     required
                   />
                   <p id="firstNameErrorMsg">
