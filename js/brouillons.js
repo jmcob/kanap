@@ -17,12 +17,52 @@ for (let i = 0; i < article.length; i++) {
 }
 // votre panier est vide / kanap supprimé
 
-const form2 = { hello: city };
-fetch("http://localhost:3000/api/products/order", {
+/// WORKING
+const form2 = {
+  hello: city,
+};
+fetch("https://mockbin.com/request", {
   method: "POST",
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
-  },
   body: form2,
 });
+////////////////////////////////////////////////////////////////
+const form2 = {
+  hello: city,
+};
+fetch("http://localhost:3000/api/products/order", {
+  method: "POST",
+  body: form2,
+});
+////////////////////////////////////////////////////////////////
+async () => {
+  const response = await fetch("http://localhost:3000/api/products/order");
+  const data = await response.json();
+  if (response.status !== 200) throw Error(data.message);
+  return data;
+};
+////////////////////////////////////////////////////////////////
+getDevices = async () => {
+  const location = window.location.hostname;
+  const settings = {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const fetchResponse = await fetch(
+      `http://localhost:3000/api/products/order/`,
+      settings
+    );
+    const data = await fetchResponse.json();
+    return data;
+  } catch (e) {
+    return e;
+  }
+};
+////////////////
+fetch("{url}", {
+  method: "post",
+  body: formData,
+}).then((response) => console.log(response));

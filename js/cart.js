@@ -159,40 +159,52 @@ const lastName = document.getElementById("lastName");
 const city = document.getElementById("city");
 const address = document.getElementById("address");
 const email = document.getElementById("email");
-const orderId = Math.floor(Math.random() * 1000000000000000); // order Id
-const form = {
+/**
+ *
+ * Expects request to contain:
+ * contact: {
+ *   firstName: string,
+ *   lastName: string,
+ *   address: string,
+ *   city: string,
+ *   email: string
+ * }
+ * products: [string] <-- array of product _id
+ *
+ */
+const contact = {
   firstName: firstName,
   lastName: lastName,
   city: city,
   address: address,
   email: email,
 };
+const product = [];
+const postLocation = "http://localhost:3000/api/products/order/";
 
-function productIDs() {
+function productsMaker() {
   let items = getCart();
-  console.log(items);
+  let products = [];
   for (i = 0; i < items.length; i++) {
-    let productIDs = [];
-    productIDs += items[i][0];
-    console.log(productIDs);
+    products.push(items[i][0]);
   }
+  console.log(products);
+  return products;
 }
-productIDs();
-function send(e) {
-  e.preventDefault();
+productsMaker();
+function post() {
   fetch("http://localhost:3000/api/products/order", {
     method: "POST",
     headers: {
-      Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(form),
+    body: JSON.stringify(contact, product),
   });
   // .then(function (res) {
   //   if (res.ok) {
   //     return res.json();
   //   }
-  // })
+  // });
   // .then(function (value) {
   //   console.log(value.postData.text);
   // });
