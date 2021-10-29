@@ -153,12 +153,25 @@ function validateCity(city) {
   }
 }
 
-// POST request
-const firstName = document.getElementById("firstName");
-const lastName = document.getElementById("lastName");
-const city = document.getElementById("city");
-const address = document.getElementById("address");
-const email = document.getElementById("email");
+//////////// POST request
+
+function getForm() {
+  let prenom = document.getElementById("firstName");
+  let nom = document.getElementById("lastName");
+  let ville = document.getElementById("city");
+  let adresse = document.getElementById("address");
+  let mail = document.getElementById("email");
+  let form = {
+    firstName: prenom,
+    lastName: nom,
+    city: ville,
+    address: adresse,
+    email: mail,
+  };
+  let contact = JSON.stringify(form);
+  return contact;
+}
+getForm();
 /**
  *
  * Expects request to contain:
@@ -172,42 +185,35 @@ const email = document.getElementById("email");
  * products: [string] <-- array of product _id
  *
  */
-const contact = {
-  firstName: firstName,
-  lastName: lastName,
-  city: city,
-  address: address,
-  email: email,
-};
-const product = [];
-const postLocation = "http://localhost:3000/api/products/order/";
 
-function productsMaker() {
+const postHere = "http://localhost:3000/api/products/order/";
+
+function getProductsIds() {
   let items = getCart();
   let products = [];
   for (i = 0; i < items.length; i++) {
     products.push(items[i][0]);
   }
-  console.log(products);
   return products;
 }
-productsMaker();
-function post() {
-  fetch("http://localhost:3000/api/products/order", {
+const orderButton = document.getElementById("order");
+orderButton.addEventListener("click", () => {
+  let products = getProductsIds();
+  let contact = getForm();
+  console.log(contact, products);
+  fetch(postHere, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(contact, product),
+    body: JSON.stringify(contact, products),
+  }).then(function (res) {
+    if (res.ok) {
+      window.location.href = "./confirmation.html";
+    } else {
+      console.log(erreur);
+    }
   });
-  // .then(function (res) {
-  //   if (res.ok) {
-  //     return res.json();
-  //   }
-  // });
-  // .then(function (value) {
-  //   console.log(value.postData.text);
-  // });
-}
+});
 
 fetchIdData();
