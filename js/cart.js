@@ -210,7 +210,4 @@ function post() {
   // });
 }
 
-// Order ID
-// get a random number id
-
 fetchIdData();
