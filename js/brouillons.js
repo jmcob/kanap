@@ -17,4 +17,12 @@ for (let i = 0; i < article.length; i++) {
 }
 // votre panier est vide / kanap supprimé
 
-// Form : submit
+const form2 = { hello: city };
+fetch("http://localhost:3000/api/products/order", {
+  method: "POST",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  body: form2,
+});

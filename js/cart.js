@@ -160,7 +160,24 @@ const city = document.getElementById("city");
 const address = document.getElementById("address");
 const email = document.getElementById("email");
 const orderId = Math.floor(Math.random() * 1000000000000000); // order Id
+const form = {
+  firstName: firstName,
+  lastName: lastName,
+  city: city,
+  address: address,
+  email: email,
+};
 
+function productIDs() {
+  let items = getCart();
+  console.log(items);
+  for (i = 0; i < items.length; i++) {
+    let productIDs = [];
+    productIDs += items[i][0];
+    console.log(productIDs);
+  }
+}
+productIDs();
 function send(e) {
   e.preventDefault();
   fetch("http://localhost:3000/api/products/order", {
@@ -169,23 +186,16 @@ function send(e) {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      firstName: firstName,
-      lastName: lastName,
-      city: city,
-      address: address,
-      email: email,
-      orderId: orderId,
-    }),
-  })
-    .then(function (res) {
-      if (res.ok) {
-        return res.json();
-      }
-    })
-    .then(function (value) {
-      console.log(value.postData.text);
-    });
+    body: JSON.stringify(form),
+  });
+  // .then(function (res) {
+  //   if (res.ok) {
+  //     return res.json();
+  //   }
+  // })
+  // .then(function (value) {
+  //   console.log(value.postData.text);
+  // });
 }
 
 // Order ID
