@@ -176,22 +176,24 @@ function getForm() {
   let ville = document.getElementById("city").value;
   let adresse = document.getElementById("address").value;
   let mail = document.getElementById("email").value;
-  let contact = {
+  let getData = {
     firstName: prenom,
     lastName: nom,
-    city: ville,
     address: adresse,
+    city: ville,
     email: mail,
   };
+  let contact = JSON.stringify(getData);
   return contact;
 }
 // fonction getProductsIds() qui génère le 'products' a partir des Ids du localStorage ; a envoyer avec le 'contact'
 function getProductsIds() {
   let items = getCart();
-  let products = [];
+  let getData = [];
   for (i = 0; i < items.length; i++) {
-    products.push(items[i][0]);
+    getData.push(items[i][0]);
   }
+  let products = JSON.stringify(getData);
   return products;
 }
 
@@ -207,8 +209,7 @@ orderButton.addEventListener("click", () => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: contact,
-    products,
+    body: JSON.stringify({ contact, products }),
   }).then(function (res) {
     if (res.ok) {
       window.location.href = "./confirmation.html";

@@ -16,7 +16,7 @@ for (let i = 0; i < article.length; i++) {
   });
 }
 // votre panier est vide / kanap supprimé
-
+// supprimer les doublons dus au couleurs dans le tableau products
 /// WORKING
 const form2 = {
   hello: city,
@@ -66,3 +66,4 @@ fetch("{url}", {
   method: "post",
   body: formData,
 }).then((response) => console.log(response));
+////////////////
