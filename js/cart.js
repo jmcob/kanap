@@ -176,20 +176,18 @@ function makeJson() {
   let ville = document.getElementById("city").value;
   let adresse = document.getElementById("address").value;
   let mail = document.getElementById("email").value;
-  let getForm = {
+  let contact = {
     firstName: prenom,
     lastName: nom,
     address: adresse,
     city: ville,
     email: mail,
   };
-  let contact = JSON.stringify(getForm);
   let items = getCart();
-  let getIds = [];
+  let products = [];
   for (i = 0; i < items.length; i++) {
     getIds.push(items[i][0]);
   }
-  let products = JSON.stringify(getIds);
   let jsonData = JSON.stringify({ contact, products });
   return jsonData;
 }
