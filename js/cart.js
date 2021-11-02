@@ -170,48 +170,45 @@ function validateCity(city) {
  *
  */
 // fonction getForm() qui genere le"contact" du formulaire
-function getForm() {
+function makeJson() {
   let prenom = document.getElementById("firstName").value;
   let nom = document.getElementById("lastName").value;
   let ville = document.getElementById("city").value;
   let adresse = document.getElementById("address").value;
   let mail = document.getElementById("email").value;
-  let getData = {
+  let getForm = {
     firstName: prenom,
     lastName: nom,
     address: adresse,
     city: ville,
     email: mail,
   };
-  let contact = JSON.stringify(getData);
-  return contact;
-}
-// fonction getProductsIds() qui génère le 'products' a partir des Ids du localStorage ; a envoyer avec le 'contact'
-function getProductsIds() {
+  let contact = JSON.stringify(getForm);
   let items = getCart();
-  let getData = [];
+  let getIds = [];
   for (i = 0; i < items.length; i++) {
-    getData.push(items[i][0]);
+    getIds.push(items[i][0]);
   }
-  let products = JSON.stringify(getData);
-  return products;
+  let products = JSON.stringify(getIds);
+  let jsonData = JSON.stringify({ contact, products });
+  return jsonData;
 }
 
 // fonction anonyme par addEventListener qui fetch 'postUrl' et poste 'contact' et 'products'
 const postUrl = "http://localhost:3000/api/products/order/";
 const orderButton = document.getElementById("order");
 orderButton.addEventListener("click", () => {
-  let products = getProductsIds();
-  let contact = getForm();
-  console.log(contact, products);
+  let jsonData = makeJson();
+  console.log(jsonData);
   fetch(postUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ contact, products }),
+    body: jsonData,
   }).then(function (res) {
     if (res.ok) {
+      localStorage.clear;
       window.location.href = "./confirmation.html";
     } else {
       console.log(erreur);
