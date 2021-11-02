@@ -154,24 +154,8 @@ function validateCity(city) {
 }
 
 //////////// POST request
-
-function getForm() {
-  let prenom = document.getElementById("firstName");
-  let nom = document.getElementById("lastName");
-  let ville = document.getElementById("city");
-  let adresse = document.getElementById("address");
-  let mail = document.getElementById("email");
-  let form = {
-    firstName: prenom,
-    lastName: nom,
-    city: ville,
-    address: adresse,
-    email: mail,
-  };
-  let contact = JSON.stringify(form);
-  return contact;
-}
-getForm();
+// generation of the JSON to post
+// extract from backend, on voit bien qu'il faut generer une partie 'contact' et une partie 'products'
 /**
  *
  * Expects request to contain:
@@ -185,9 +169,23 @@ getForm();
  * products: [string] <-- array of product _id
  *
  */
-
-const postHere = "http://localhost:3000/api/products/order/";
-
+// fonction getForm() qui genere le"contact" du formulaire
+function getForm() {
+  let prenom = document.getElementById("firstName").value;
+  let nom = document.getElementById("lastName").value;
+  let ville = document.getElementById("city").value;
+  let adresse = document.getElementById("address").value;
+  let mail = document.getElementById("email").value;
+  let contact = {
+    firstName: prenom,
+    lastName: nom,
+    city: ville,
+    address: adresse,
+    email: mail,
+  };
+  return contact;
+}
+// fonction getProductsIds() qui génère le 'products' a partir des Ids du localStorage ; a envoyer avec le 'contact'
 function getProductsIds() {
   let items = getCart();
   let products = [];
@@ -196,17 +194,21 @@ function getProductsIds() {
   }
   return products;
 }
+
+// fonction anonyme par addEventListener qui fetch 'postUrl' et poste 'contact' et 'products'
+const postUrl = "http://localhost:3000/api/products/order/";
 const orderButton = document.getElementById("order");
 orderButton.addEventListener("click", () => {
   let products = getProductsIds();
   let contact = getForm();
   console.log(contact, products);
-  fetch(postHere, {
+  fetch(postUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(contact, products),
+    body: contact,
+    products,
   }).then(function (res) {
     if (res.ok) {
       window.location.href = "./confirmation.html";
