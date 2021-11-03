@@ -118,15 +118,14 @@ function validateEmail(email) {
     emailErrorMsg.innerHTML = null;
   }
 }
-// simple RegEx for names
+// simple RegEx for names : caratères acceptés par la RegEx
 const regexName =
-  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u; // carateres acceptés par la RegEx
+  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
 // first name
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 function validateFirstName(firstName) {
   if (regexName.test(firstName) == false) {
-    firstNameErrorMsg.innerHTML =
-      "Entrez un prénom valide entre 1 et 50 caratères.";
+    firstNameErrorMsg.innerHTML = "Entrez un prénom valide sans chiffre.";
   } else {
     firstNameErrorMsg.innerHTML = null;
   }
@@ -136,8 +135,7 @@ function validateFirstName(firstName) {
 const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
 function validateLastName(lastName) {
   if (regexName.test(lastName) == false) {
-    lastNameErrorMsg.innerHTML =
-      "Entrez un nom valide entre 1 et 50 caratères.";
+    lastNameErrorMsg.innerHTML = "Entrez un nom valide sans chiffre.";
   } else {
     lastNameErrorMsg.innerHTML = null;
   }
@@ -147,8 +145,7 @@ function validateLastName(lastName) {
 const cityErrorMsg = document.getElementById("cityErrorMsg");
 function validateCity(city) {
   if (regexName.test(city) == false) {
-    cityErrorMsg.innerHTML =
-      "Entrez une commune valide entre 1 et 50 caratères.";
+    cityErrorMsg.innerHTML = "Entrez une commune valide sans chiffre.";
   } else {
     cityErrorMsg.innerHTML = null;
   }
@@ -171,7 +168,7 @@ function validateCity(city) {
  *
  */
 // fonction getForm() qui genere le"contact" du formulaire
-function makeJson() {
+function makeJsonData() {
   let prenom = document.getElementById("firstName").value;
   let nom = document.getElementById("lastName").value;
   let ville = document.getElementById("city").value;
@@ -197,8 +194,7 @@ function makeJson() {
 const postUrl = "http://localhost:3000/api/products/order/";
 const orderButton = document.getElementById("order");
 orderButton.addEventListener("click", () => {
-  let jsonData = makeJson();
-  console.log(jsonData);
+  let jsonData = makeJsonData();
   fetch(postUrl, {
     method: "POST",
     headers: {
