@@ -118,8 +118,9 @@ function validateEmail(email) {
     emailErrorMsg.innerHTML = null;
   }
 }
-// simple regex for names
-const regexName = /^[\p{L}'][ \p{L}'-]*[\p{L}]$/u;
+// simple RegEx for names
+const regexName =
+  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u; // carateres acceptés par la RegEx
 // first name
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 function validateFirstName(firstName) {
@@ -206,7 +207,7 @@ orderButton.addEventListener("click", () => {
     body: jsonData,
   }).then(function (res) {
     if (res.ok) {
-      localStorage.clear;
+      localStorage.clear();
       window.location.href = "./confirmation.html";
     } else {
       console.log(erreur);
