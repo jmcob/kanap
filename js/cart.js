@@ -1,8 +1,8 @@
-//////////////////
-// add to cart //
-////////////////
+//////////////////////////
+//    cart elements     //
+//////////////////////////
 
-// la fameuse fonction get cart qui recupere le panier utilisée plusieurs fois dans la page
+// la fameuse fonction "getCart" qui recupere le panier ; utilisée plusieurs fois dans la page
 function getCart() {
   let items = [];
   if (localStorage.getItem("panier") != null) {
@@ -37,7 +37,7 @@ function add2Cart(productId, color, qty) {
 
 // Element HTML du cart
 const cartSection = document.getElementById("cart__items");
-// Bouton deleteItem du cart
+// Fonction du bouton deleteItem du cart, qui supprime une entrée du local storage
 function deleteItem() {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -46,6 +46,7 @@ function deleteItem() {
     window.location.reload();
   }
 }
+// La fonction qui récupere la veleur modifiée sur la page de la quantité d'un kanap, et qui met a jour le local storage.
 function changeQuantity(id, color, qty) {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -57,7 +58,7 @@ function changeQuantity(id, color, qty) {
   }
 }
 
-// la fonction fetch qui recupere le panier, les données a fetcher, et les écrit en HTML
+// la fonction fetch qui recupere le panier, les data a recuperer en JSON, et les écrit en HTML
 function fetchIdData() {
   let items = getCart();
   let qty = 0;
@@ -90,7 +91,7 @@ function fetchIdData() {
                   </div>
                 </div>
               </article>`;
-        // total price (if qty)
+        // total price (if qty (items[i][2]))
         price += data.price * items[i][2];
         document.getElementById("totalPrice").innerHTML = price;
       });
@@ -100,5 +101,114 @@ function fetchIdData() {
     document.getElementById("totalQuantity").innerHTML = qty;
   }
 }
+
+////////////////////////////////////////////////////////////////
+// Form elements & POST request ////////////////////
+////////////////////////////////////////////////////////////////
+
+//// REGEXs
+// email
+const emailErrorMsg = document.getElementById("emailErrorMsg");
+function validateEmail(email) {
+  const regexMail =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (regexMail.test(email) == false) {
+    emailErrorMsg.innerHTML = "Entrez une adresse e-mail valide.";
+  } else {
+    emailErrorMsg.innerHTML = null;
+  }
+}
+// simple RegEx for names : caratères acceptés par la RegEx
+const regexName =
+  /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+// first name
+const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
+function validateFirstName(firstName) {
+  if (regexName.test(firstName) == false) {
+    firstNameErrorMsg.innerHTML = "Entrez un prénom valide sans chiffre.";
+  } else {
+    firstNameErrorMsg.innerHTML = null;
+  }
+}
+
+// last name
+const lastNameErrorMsg = document.getElementById("lastNameErrorMsg");
+function validateLastName(lastName) {
+  if (regexName.test(lastName) == false) {
+    lastNameErrorMsg.innerHTML = "Entrez un nom valide sans chiffre.";
+  } else {
+    lastNameErrorMsg.innerHTML = null;
+  }
+}
+
+// city
+const cityErrorMsg = document.getElementById("cityErrorMsg");
+function validateCity(city) {
+  if (regexName.test(city) == false) {
+    cityErrorMsg.innerHTML = "Entrez une commune valide sans chiffre.";
+  } else {
+    cityErrorMsg.innerHTML = null;
+  }
+}
+
+//////////// POST request
+// generation of the JSON to post
+// extract from backend, on voit bien qu'il faut generer une partie 'contact' et une partie 'products'
+/**
+ *
+ * Expects request to contain:
+ * contact: {
+ *   firstName: string,
+ *   lastName: string,
+ *   address: string,
+ *   city: string,
+ *   email: string
+ * }
+ * products: [string] <-- array of product _id
+ *
+ */
+// fonction getForm() qui genere le"contact" du formulaire
+function makeJsonData() {
+  let prenom = document.getElementById("firstName").value;
+  let nom = document.getElementById("lastName").value;
+  let ville = document.getElementById("city").value;
+  let adresse = document.getElementById("address").value;
+  let mail = document.getElementById("email").value;
+  let contact = {
+    firstName: prenom,
+    lastName: nom,
+    address: adresse,
+    city: ville,
+    email: mail,
+  };
+  let items = getCart();
+  let products = [];
+  for (i = 0; i < items.length; i++) {
+    products.push(items[i][0]);
+  }
+  let jsonData = JSON.stringify({ contact, products });
+  return jsonData;
+}
+
+// fonction anonyme par addEventListener qui fetch 'postUrl' et poste 'contact' et 'products'
+const postUrl = "http://localhost:3000/api/products/order/";
+const orderButton = document.getElementById("order");
+orderButton.addEventListener("click", () => {
+  let jsonData = makeJsonData();
+  fetch(postUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: jsonData,
+  }).then(function (res) {
+    if (res.ok) {
+      localStorage.clear();
+      window.location.href = "./confirmation.html";
+    } else {
+      console.log(erreur);
+    }
+  });
+});
 
 fetchIdData();
