@@ -15,56 +15,10 @@ for (let i = 0; i < article.length; i++) {
     }
   });
 }
+////makejsondata
+if (products.find(items[i][0])) {
+  products.pop();
+}
 // res.json
 // votre panier est vide / kanap supprimé
 // supprimer les doublons dus au couleurs dans le tableau products
-/// WORKING
-const form2 = {
-  hello: city,
-};
-fetch("https://mockbin.com/request", {
-  method: "POST",
-  body: form2,
-});
-////////////////////////////////////////////////////////////////
-const form2 = {
-  hello: city,
-};
-fetch("http://localhost:3000/api/products/order", {
-  method: "POST",
-  body: form2,
-});
-////////////////////////////////////////////////////////////////
-async () => {
-  const response = await fetch("http://localhost:3000/api/products/order");
-  const data = await response.json();
-  if (response.status !== 200) throw Error(data.message);
-  return data;
-};
-////////////////////////////////////////////////////////////////
-getDevices = async () => {
-  const location = window.location.hostname;
-  const settings = {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  };
-  try {
-    const fetchResponse = await fetch(
-      `http://localhost:3000/api/products/order/`,
-      settings
-    );
-    const data = await fetchResponse.json();
-    return data;
-  } catch (e) {
-    return e;
-  }
-};
-////////////////
-fetch("{url}", {
-  method: "post",
-  body: formData,
-}).then((response) => console.log(response));
-////////////////

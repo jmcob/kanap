@@ -103,10 +103,10 @@ function fetchIdData() {
 }
 
 ////////////////////////////////////////////////////////////////
-// Form elements
+// Form elements & POST request ////////////////////
 ////////////////////////////////////////////////////////////////
 
-//// REGEXs (no regex for address form nor first name, last name or city)
+//// REGEXs
 // email
 const emailErrorMsg = document.getElementById("emailErrorMsg");
 function validateEmail(email) {
