@@ -9,7 +9,7 @@ const objectURL = "http://localhost:3000/api/products/" + id;
 console.log("Fetch URL is " + objectURL);
 
 /////////
-// Fetching data from backend & DOM
+// Fetching data from backend & constructing DOM
 /////////
 let cardsFetch = function () {
   fetch(objectURL)
@@ -39,43 +39,9 @@ let cardsFetch = function () {
 };
 cardsFetch();
 
-//////////////////
-// add to cart //
-////////////////
-
-// la fameuse fonction get cart qui recupere le panier.
-function getCart() {
-  let items = [];
-  if (localStorage.getItem("panier") != null) {
-    items = JSON.parse(localStorage.getItem("panier"));
-  }
-  return items;
-}
-
-// La fameuse fonction add2cart qui ajoute au panier sous conditions et dans l'ordre
-function add2Cart(productId, color, qty) {
-  if (qty == 0) {
-    return;
-  }
-  let items = getCart();
-  if (items.length == 0) {
-    items = [[productId, color, qty]];
-  } else {
-    let found = false;
-    for (let i = 0; i < items.length; i++) {
-      if (productId === items[i][0] && color === items[i][1]) {
-        found = true;
-        items[i][2] += qty;
-      }
-    }
-    if (found == false) {
-      let item = [productId, color, qty];
-      items.push(item);
-    }
-  }
-  localStorage.setItem("panier", JSON.stringify(items));
-}
-
+////////
+//Getting HTML values from HTML
+/////////
 // La fonction qui recupere la valeur du champs quantity dans le markup
 function qtyValue() {
   let qty = document.getElementById("quantity");
