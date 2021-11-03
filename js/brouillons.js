@@ -15,6 +15,7 @@ for (let i = 0; i < article.length; i++) {
     }
   });
 }
+// res.json
 // votre panier est vide / kanap supprimé
 // supprimer les doublons dus au couleurs dans le tableau products
 /// WORKING

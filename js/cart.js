@@ -186,7 +186,7 @@ function makeJson() {
   let items = getCart();
   let products = [];
   for (i = 0; i < items.length; i++) {
-    getIds.push(items[i][0]);
+    products.push(items[i][0]);
   }
   let jsonData = JSON.stringify({ contact, products });
   return jsonData;
