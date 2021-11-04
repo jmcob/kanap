@@ -1,4 +1,4 @@
-// Fetching data from backend
+// Fetching data from backend, displaying kanaps on front page
 let cardsFetch = function () {
   fetch("http://localhost:3000/api/products")
     .then((response) => response.json())

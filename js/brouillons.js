@@ -19,6 +19,8 @@ for (let i = 0; i < article.length; i++) {
 if (products.find(items[i][0])) {
   products.pop();
 }
+// Doc en anglais
+// onchange validation sur le bouton
 // res.json
 // votre panier est vide / kanap supprimé
 // supprimer les doublons dus au couleurs dans le tableau products
