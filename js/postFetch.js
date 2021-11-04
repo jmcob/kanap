@@ -1,4 +1,4 @@
-// fonction anonyme par addEventListener qui fetch 'postUrl' et poste 'contact' et 'products'
+// anonymous function with addEventListener that fetches 'postUrl' et posts 'contact' and 'products'
 const postUrl = "http://localhost:3000/api/products/order/";
 const orderButton = document.getElementById("order");
 orderButton.addEventListener("click", () => {

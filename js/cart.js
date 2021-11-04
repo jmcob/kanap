@@ -2,7 +2,7 @@
 //    cart elements     //
 //////////////////////////
 
-// la fameuse fonction "getCart" qui recupere le panier ; utilisée plusieurs fois dans la page
+// getCart function gets the cart from localStorage ; used multiple times
 function getCart() {
   let items = [];
   if (localStorage.getItem("panier") != null) {
@@ -11,7 +11,7 @@ function getCart() {
   return items;
 }
 
-// La fameuse fonction add2cart qui ajoute au panier sous conditions et dans l'ordre
+// add2cart function adds the selected kanap to the localStorage, depending on if it's already here or not in the localStorage
 function add2Cart(productId, color, qty) {
   if (qty == 0) {
     return;
@@ -37,7 +37,7 @@ function add2Cart(productId, color, qty) {
 
 // Element HTML du cart
 const cartSection = document.getElementById("cart__items");
-// Fonction du bouton deleteItem du cart, qui supprime une entrée du local storage
+// function deleItem deletes a selected entry from the localStorage
 function deleteItem() {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -46,7 +46,7 @@ function deleteItem() {
     window.location.reload();
   }
 }
-// La fonction qui récupere la veleur modifiée sur la page de la quantité d'un kanap, et qui met a jour le local storage.
+// function changeQuantity makes the localStorage quantity reflect whats the user chosses on the HTML page
 function changeQuantity(id, color, qty) {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -58,7 +58,7 @@ function changeQuantity(id, color, qty) {
   }
 }
 
-// la fonction fetch qui recupere le panier, les data a recuperer en JSON, et les écrit en HTML
+// fetch function gets the data from backend to fill the properties of the kanaps on cart.html page
 function fetchIdData() {
   let items = getCart();
   let qty = 0;
@@ -118,7 +118,7 @@ function validateEmail(email) {
     emailErrorMsg.innerHTML = null;
   }
 }
-// simple RegEx for names : caratères acceptés par la RegEx
+// simple RegEx for names : accepted characters by RegEx
 const regexName =
   /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
 // first name
@@ -153,7 +153,7 @@ function validateCity(city) {
 
 //////////// POST request
 // generation of the JSON to post
-// extract from backend, on voit bien qu'il faut generer une partie 'contact' et une partie 'products'
+// extracted from backend :
 /**
  *
  * Expects request to contain:

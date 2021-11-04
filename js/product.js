@@ -42,13 +42,13 @@ cardsFetch();
 ////////
 //Getting HTML values from HTML
 /////////
-// La fonction qui recupere la valeur du champs quantity dans le markup
+// function that gets quantity value of the form in the markup
 function qtyValue() {
   let qty = document.getElementById("quantity");
   return qty.value;
 }
 
-// La fonction qui recupere la valeur de la couleur du kanap dans le markup
+// function that get the kanap color value in the markup
 function colorValue() {
   let color = document.getElementById("colors");
   return color.value;
@@ -56,7 +56,7 @@ function colorValue() {
 
 // HTML element : button add to cart
 const toCartBtn = document.getElementById("addToCart");
-// au bouton toCartBtn, fonction addCart qui active les autres fonction au click
+// at button press : toCartBtn, function addCart that activates the 2 other function by click
 toCartBtn.addEventListener("click", () => {
   let qty = parseInt(qtyValue());
   let color = colorValue();
