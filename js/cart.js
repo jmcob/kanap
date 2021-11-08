@@ -66,20 +66,15 @@ function fetchIdData() {
   let items = getCart();
   let qty = 0;
   let price = 0;
-  if ((items = [])) {
-    h1[0].innerHTML = `Votre panier est vide`;
-
-    cartOrder[0].innerHTML = "";
-    cartPrice[0].innerHTML = "";
-  }
-  for (let i = 0; i < items.length; i++) {
-    let id = items[i][0];
-    let color = items[i][1];
-    let url = "http://localhost:3000/api/products/" + id;
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        cartSection.innerHTML += `<article class="cart__item" data-id="${id}" data-color="${color}">
+  if (localStorage.getItem("panier") != null) {
+    for (let i = 0; i < items.length; i++) {
+      let id = items[i][0];
+      let color = items[i][1];
+      let url = "http://localhost:3000/api/products/" + id;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          cartSection.innerHTML += `<article class="cart__item" data-id="${id}" data-color="${color}">
                 <div class="cart__item__img">
                   <img src="${data.imageUrl}" alt="${data.altTxt}">
                 </div>
@@ -99,14 +94,19 @@ function fetchIdData() {
                   </div>
                 </div>
               </article>`;
-        // total price (if qty (items[i][2]))
-        price += data.price * items[i][2];
-        document.getElementById("totalPrice").innerHTML = price;
-      });
+          // total price (if qty (items[i][2]))
+          price += data.price * items[i][2];
+          document.getElementById("totalPrice").innerHTML = price;
+        });
 
-    // total Quantity
-    qty += items[i][2];
-    document.getElementById("totalQuantity").innerHTML = qty;
+      // total Quantity
+      qty += items[i][2];
+      document.getElementById("totalQuantity").innerHTML = qty;
+    }
+  } else {
+    h1[0].innerHTML = `Votre panier est vide`;
+    cartOrder[0].innerHTML = "";
+    cartPrice[0].innerHTML = "";
   }
 }
 
@@ -193,6 +193,9 @@ function makeJsonData() {
   let products = [];
   for (i = 0; i < items.length; i++) {
     products.push(items[i][0]);
+  }
+  if (products.find(items[i][0])) {
+    products.pop();
   }
   let jsonData = JSON.stringify({ contact, products });
   return jsonData;

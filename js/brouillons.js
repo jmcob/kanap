@@ -20,10 +20,10 @@ if (products.find(items[i][0])) {
   products.pop();
 }
 // onchange validation sur le bouton
-// res.json
-// votre panier est vide / kanap supprimé / effeacer le form
+// res.json orderId
+
 // supprimer les doublons dus au couleurs dans le tableau products
-// il y a des erreurs console (sans degats) sur les autres pages que cart.html
+// il y a des erreurs console (sans degats possibles) sur les autres pages que cart.html
 
 Il faut verifier les regex ;
 il faut verifier qu'on ne puisse pas ajouter n'importe quellle requete au backend
