@@ -35,8 +35,6 @@ function add2Cart(productId, color, qty) {
   localStorage.setItem("panier", JSON.stringify(items));
 }
 
-// Element HTML du cart
-const cartSection = document.getElementById("cart__items");
 // function deleItem deletes a selected entry from the localStorage
 function deleteItem() {
   let items = getCart();
@@ -57,13 +55,23 @@ function changeQuantity(id, color, qty) {
     window.location.reload();
   }
 }
+// Element HTML du cart
+const cartSection = document.getElementById("cart__items");
+const cartOrder = document.getElementsByClassName("cart__order");
+const cartPrice = document.getElementsByClassName("cart__price");
+const h1 = document.getElementsByTagName("h1");
 
 // fetch function gets the data from backend to fill the properties of the kanaps on cart.html page
 function fetchIdData() {
   let items = getCart();
   let qty = 0;
   let price = 0;
+  if ((items = [])) {
+    h1[0].innerHTML = `Votre panier est vide`;
 
+    cartOrder[0].innerHTML = "";
+    cartPrice[0].innerHTML = "";
+  }
   for (let i = 0; i < items.length; i++) {
     let id = items[i][0];
     let color = items[i][1];

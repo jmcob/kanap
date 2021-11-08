@@ -19,8 +19,13 @@ for (let i = 0; i < article.length; i++) {
 if (products.find(items[i][0])) {
   products.pop();
 }
-// Doc en anglais
 // onchange validation sur le bouton
 // res.json
-// votre panier est vide / kanap supprimé
+// votre panier est vide / kanap supprimé / effeacer le form
 // supprimer les doublons dus au couleurs dans le tableau products
+// il y a des erreurs console (sans degats) sur les autres pages que cart.html
+
+Il faut verifier les regex ;
+il faut verifier qu'on ne puisse pas ajouter n'importe quellle requete au backend
+never trust user input
+
