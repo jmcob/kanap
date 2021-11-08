@@ -43,6 +43,9 @@ function deleteItem() {
     localStorage.setItem("panier", JSON.stringify(items));
     window.location.reload();
   }
+  if (items.length == 0) {
+    localStorage.clear();
+  }
 }
 // function changeQuantity makes the localStorage quantity reflect whats the user chosses on the HTML page
 function changeQuantity(id, color, qty) {

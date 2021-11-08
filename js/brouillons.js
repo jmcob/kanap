@@ -1,20 +1,4 @@
-//fonction pour supprimer un item du storage et changer son HTML
-for (let i = 0; i < article.length; i++) {
-  deleteItem.addEventListener("click", () => {
-    let items = getCart();
-    let id = article[i].dataset.id;
-    let color = article[i].dataset.color;
-    for (let j = 0; j < items.length; j++) {
-      if (id == items[j][0] && color == items[j][1]) {
-        let deletedItem = items.splice(j, 1);
-        localStorage.setItem("panier", JSON.stringify(items));
-        document.getElementsByClass(
-          cart__item[i]
-        ).innerHTML = `<p>Kanap supprimé du panier !</p>`;
-      }
-    }
-  });
-}
+
 ////makejsondata
 if (products.find(items[i][0])) {
   products.pop();
@@ -25,7 +9,12 @@ if (products.find(items[i][0])) {
 // supprimer les doublons dus au couleurs dans le tableau products
 // il y a des erreurs console (sans degats possibles) sur les autres pages que cart.html
 
-Il faut verifier les regex ;
+`Il faut verifier les regex ;
 il faut verifier qu'on ne puisse pas ajouter n'importe quellle requete au backend
-never trust user input
 
+
+vérifier que quend le panier est VIDE, la page affiche le panier est vide
+vérifier que quend le panier est VID(é), la page affiche le panier est vide``
+
+// test cart
+[["415b7cacb65d43b2b5c1ff70f3393ad1","Black/Yellow",1],["415b7cacb65d43b2b5c1ff70f3393ad1","Black/Red",1]]
