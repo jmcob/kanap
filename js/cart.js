@@ -196,9 +196,9 @@ function makeJsonData() {
   let products = [];
   for (i = 0; i < items.length; i++) {
     products.push(items[i][0]);
-  }
-  if (products.find(items[i][0])) {
-    products.pop();
+    // if (products.find(items[i][0])) {
+    //   products.pop();
+    // }
   }
   let jsonData = JSON.stringify({ contact, products });
   return jsonData;
