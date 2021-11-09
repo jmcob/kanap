@@ -15,6 +15,3 @@ il faut verifier qu'on ne puisse pas ajouter n'importe quellle requete au backen
 
 vérifier que quend le panier est VIDE, la page affiche le panier est vide
 vérifier que quend le panier est VID(é), la page affiche le panier est vide``
-
-// test cart
-[["415b7cacb65d43b2b5c1ff70f3393ad1","Black/Yellow",1],["415b7cacb65d43b2b5c1ff70f3393ad1","Black/Red",1]]
