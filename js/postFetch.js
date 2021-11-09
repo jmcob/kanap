@@ -7,7 +7,7 @@ window.onbeforeunload = function dontLeave() {
 const postUrl = "http://localhost:3000/api/products/order/";
 const orderButton = document.getElementById("order");
 orderButton.addEventListener("click", (e) => {
-  e.preventDefault(); //peut etre supprimer pour enlever l'action par défaut du onclick
+  e.preventDefault(); //prevent default form button action
   let jsonData = makeJsonData();
   fetch(postUrl, {
     method: "POST",
@@ -17,18 +17,23 @@ orderButton.addEventListener("click", (e) => {
     body: jsonData,
   })
     .then((res) => res.json())
-    // statut 201 pour vérifier
-    // .then((data) => console.log(data))
+    // to check res.ok status in the network
     .then((data) => {
-      console.log(data);
-      console.log("ici ohh");
-      //   console.log(res.orderId);
-      //   // localStorage.clear();
-      let url = new URL("id?=" + data.orderId, "./confirmation.html");
       console.log(data.orderId);
+      console.log("ici ohh");
+      // localStorage.clear();
+      // const confirmationUrl = new URL(
+      //   data.orderId,
+      //   "http://127.0.0.1:5501/html/confirmation.html?id="
+      // );
+      // const youpi = new URL("confirmation.html?id=" + data.orderId, "./");
+      let url = "./confirmation.html?id=" + data.orderId;
+      console.log(url);
+      // console.log(confirmationUrl);
+      // console.log(youpi);
       window.location.href = url;
     })
     .catch(() => {
       alert("Une erreur est survenue, merci de revenir plus tard.");
-    }); // pour catch les erreurs au cas ou le serv est down par exemple
+    }); // catching errors
 });
