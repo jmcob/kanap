@@ -4,4 +4,4 @@ Back-end fourni, HTML / CSS aussi, il manque la conception du JS dans ce projet 
 
 Après une page d'accueil qui met le fetch et le innerHTML a l'epreuve, la page product a pour défi l'ajout a panier.
 
-La page cart.html, du panier proprement dit definit son comportement et l'envoi des données du localStorage à l'API backend pas POST.
+La page cart.html, du panier proprement dit definit son comportement et l'envoi des données du localStorage à l'API backend par fetch POST.
