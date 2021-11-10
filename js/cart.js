@@ -271,7 +271,7 @@ orderButton.addEventListener("click", (e) => {
     .then((res) => res.json())
     // to check res.ok status in the network
     .then((data) => {
-      // localStorage.clear();
+      localStorage.clear();
       let confirmationUrl = "./confirmation.html?id=" + data.orderId;
       window.location.href = confirmationUrl;
     })
