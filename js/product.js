@@ -4,9 +4,7 @@
 const str = window.location;
 const url = new URL(str);
 const id = url.searchParams.get("id");
-console.log("kanap idis " + id);
 const objectURL = "http://localhost:3000/api/products/" + id;
-console.log("Fetch URL is " + objectURL);
 
 /////////
 // Fetching data from backend & constructing DOM
