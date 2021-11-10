@@ -137,7 +137,7 @@ function validateEmail(mail) {
   }
 }
 // simple RegEx for names : accepted characters by RegEx
-const regexName = /[A-Z]/gi;
+const regexName = /[A-Za-z]\D/gi;
 // first name
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 function validateFirstName(prenom) {
@@ -203,21 +203,26 @@ function validateAddress(adresse) {
 
 function makeJsonData() {
   let contact = {
-    firstName: prenom,
-    lastName: nom,
-    address: adresse,
-    city: ville,
-    email: mail,
+    firstName: prenom.value,
+    lastName: nom.value,
+    address: adresse.value,
+    city: ville.value,
+    email: mail.value,
   };
   let items = getCart();
+  let itemsLength = items.length;
   let products = [];
+
   for (i = 0; i < items.length; i++) {
-    products.push(items[i][0]);
-    // if (products.find(items[i][0])) {
-    //   products.pop();
-    // }
+    if (products.find((e) => e == items[i][0])) {
+      console.log("not found");
+    } else {
+      products.push(items[i][0]);
+      console.log("found");
+    }
   }
   let jsonData = JSON.stringify({ contact, products });
+  console.log(jsonData);
   return jsonData;
 }
 // anonymous function with addEventListener that fetches 'postUrl' et posts 'contact' and 'products' to retrieve the confirmation page URL
@@ -266,7 +271,7 @@ orderButton.addEventListener("click", (e) => {
     .then((res) => res.json())
     // to check res.ok status in the network
     .then((data) => {
-      localStorage.clear();
+      // localStorage.clear();
       let confirmationUrl = "./confirmation.html?id=" + data.orderId;
       window.location.href = confirmationUrl;
     })
