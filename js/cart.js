@@ -38,13 +38,16 @@ function add2Cart(productId, color, qty) {
 // function deleItem deletes a selected entry from the localStorage
 function deleteItem() {
   let items = getCart();
-  for (let i = 0; i < items.length; i++) {
-    let removedItem = items.splice(i, 1);
-    localStorage.setItem("panier", JSON.stringify(items));
-    window.location.reload();
+  if (items.length != 0) {
+    for (let i = 0; i < items.length; i++) {
+      let removedItem = items.splice(i, 1);
+      localStorage.setItem("panier", JSON.stringify(items));
+      window.location.reload();
+    }
   }
   if (items.length == 0) {
     localStorage.clear();
+    window.location.reload();
   }
 }
 // function changeQuantity makes the localStorage quantity reflect whats the user chosses on the HTML page
@@ -84,6 +87,7 @@ function fetchIdData() {
                 <div class="cart__item__content">
                   <div class="cart__item__content__titlePrice">
                     <h2>${data.name}</h2>
+                    <p>${color}</p>
                     <p>${data.price} €</p>
                   </div>
                   <div class="cart__item__content__settings">
@@ -103,7 +107,7 @@ function fetchIdData() {
         });
 
       // total Quantity
-      qty += items[i][2];
+      qty += parseInt(items[i][2]);
       document.getElementById("totalQuantity").innerHTML = qty;
     }
   } else {
