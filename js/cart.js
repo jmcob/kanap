@@ -214,7 +214,6 @@ function makeJsonData() {
     email: mail.value,
   };
   let items = getCart();
-  let itemsLength = items.length;
   let products = [];
 
   for (i = 0; i < items.length; i++) {
@@ -222,11 +221,9 @@ function makeJsonData() {
       console.log("not found");
     } else {
       products.push(items[i][0]);
-      console.log("found");
     }
   }
   let jsonData = JSON.stringify({ contact, products });
-  console.log(jsonData);
   return jsonData;
 }
 // anonymous function with addEventListener that fetches 'postUrl' et posts 'contact' and 'products' to retrieve the confirmation page URL
