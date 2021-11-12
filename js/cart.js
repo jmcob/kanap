@@ -36,15 +36,14 @@ function add2Cart(productId, color, qty) {
 }
 
 // function deleItem deletes a selected entry from the localStorage
-function deleteItem() {
+function deleteItem(id, color) {
   let items = getCart();
-  for (let i = 0; i < items.length; i++) {
-    let removedItem = items.splice(i, 1);
-    localStorage.setItem("panier", JSON.stringify(items));
-    window.location.reload();
-  }
-  if (items.length == 0) {
-    localStorage.clear();
+  for (i = 0; i < items.length; i++) {
+    if (id === items[i][0] && color === items[i][1]) {
+      items.splice(i, 1);
+      localStorage.setItem("panier", JSON.stringify(items));
+      window.location.reload();
+    }
   }
 }
 // function changeQuantity makes the localStorage quantity reflect whats the user chosses on the HTML page
@@ -84,6 +83,7 @@ function fetchIdData() {
                 <div class="cart__item__content">
                   <div class="cart__item__content__titlePrice">
                     <h2>${data.name}</h2>
+                    <p>${color}</p>
                     <p>${data.price} €</p>
                   </div>
                   <div class="cart__item__content__settings">
@@ -92,7 +92,7 @@ function fetchIdData() {
                       <input type="number" class="itemQuantity" name="itemQuantity" onchange="changeQuantity('${id}', '${color}', this.value)" min="1" max="100" value="${items[i][2]}">
                     </div>
                     <div class="cart__item__content__settings__delete">
-                      <p class="deleteItem" onclick="deleteItem()">Supprimer</p>
+                      <p class="deleteItem" onclick="deleteItem('${id}','${color}')">Supprimer</p>
                     </div>
                   </div>
                 </div>
@@ -103,7 +103,7 @@ function fetchIdData() {
         });
 
       // total Quantity
-      qty += items[i][2];
+      qty += parseInt(items[i][2]);
       document.getElementById("totalQuantity").innerHTML = qty;
     }
   } else {
@@ -210,7 +210,6 @@ function makeJsonData() {
     email: mail.value,
   };
   let items = getCart();
-  let itemsLength = items.length;
   let products = [];
 
   for (i = 0; i < items.length; i++) {
@@ -218,11 +217,9 @@ function makeJsonData() {
       console.log("not found");
     } else {
       products.push(items[i][0]);
-      console.log("found");
     }
   }
   let jsonData = JSON.stringify({ contact, products });
-  console.log(jsonData);
   return jsonData;
 }
 // anonymous function with addEventListener that fetches 'postUrl' et posts 'contact' and 'products' to retrieve the confirmation page URL
