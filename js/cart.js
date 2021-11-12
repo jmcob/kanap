@@ -36,18 +36,14 @@ function add2Cart(productId, color, qty) {
 }
 
 // function deleItem deletes a selected entry from the localStorage
-function deleteItem() {
+function deleteItem(id, color) {
   let items = getCart();
-  if (items.length != 0) {
-    for (let i = 0; i < items.length; i++) {
-      let removedItem = items.splice(i, 1);
+  for (i = 0; i < items.length; i++) {
+    if (id === items[i][0] && color === items[i][1]) {
+      items.splice(i, 1);
       localStorage.setItem("panier", JSON.stringify(items));
       window.location.reload();
     }
-  }
-  if (items.length == 0) {
-    localStorage.clear();
-    window.location.reload();
   }
 }
 // function changeQuantity makes the localStorage quantity reflect whats the user chosses on the HTML page
@@ -96,7 +92,7 @@ function fetchIdData() {
                       <input type="number" class="itemQuantity" name="itemQuantity" onchange="changeQuantity('${id}', '${color}', this.value)" min="1" max="100" value="${items[i][2]}">
                     </div>
                     <div class="cart__item__content__settings__delete">
-                      <p class="deleteItem" onclick="deleteItem()">Supprimer</p>
+                      <p class="deleteItem" onclick="deleteItem('${id}','${color}')">Supprimer</p>
                     </div>
                   </div>
                 </div>
