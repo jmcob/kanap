@@ -13,7 +13,7 @@ function getCart() {
 
 // add2cart function adds the selected kanap to the localStorage, depending on if it's already here or not in the localStorage
 function add2Cart(productId, color, qty) {
-  if (qty == 0) {
+  if (qty <= 0 || color == "") {
     return;
   }
   let items = getCart();
