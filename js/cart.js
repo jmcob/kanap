@@ -63,12 +63,14 @@ function changeQuantity(id, color, qty) {
 ////////////////////////////////////////////////////////////////
 
 //// REGEXs
+// no regex for addresses, "required" attribute speaks for himself
 // valeurs des champs en variables const
 const prenom = document.getElementById("firstName");
 const nom = document.getElementById("lastName");
 const ville = document.getElementById("city");
 const adresse = document.getElementById("address");
 const mail = document.getElementById("email");
+
 // email
 const emailErrorMsg = document.getElementById("emailErrorMsg");
 function validateEmail(mail) {
@@ -82,7 +84,10 @@ function validateEmail(mail) {
   }
 }
 // simple RegEx for names : accepted characters by RegEx
-const regexName = /[A-Za-z]\D/gi;
+// const regexName = /[a-z]\D/gi;
+const regexName = /^[a-z][a-z '-.,]{1,31}$|^$/i;
+
+// const regexName = /./;
 // first name
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 function validateFirstName(prenom) {
@@ -112,18 +117,6 @@ function validateCity(ville) {
     return false;
   } else {
     cityErrorMsg.innerHTML = null;
-    return true;
-  }
-}
-
-//REGEX addresses :
-const regexAddress = /./;
-const addressErrorMsg = document.getElementById("addressErrorMsg");
-function validateAddress(adresse) {
-  if (regexName.test(adresse) == false) {
-    return false;
-  } else {
-    addressErrorMsg.innerHTML = null;
     return true;
   }
 }
