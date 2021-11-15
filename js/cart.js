@@ -46,7 +46,7 @@ function deleteItem(id, color) {
     }
   }
 }
-// function changeQuantity makes the localStorage quantity reflect whats the user chosses on the HTML page
+// function changeQuantity makes the localStorage quantity reflect whats the user chooses on the HTML page
 function changeQuantity(id, color, qty) {
   let items = getCart();
   for (let i = 0; i < items.length; i++) {
@@ -64,7 +64,7 @@ function changeQuantity(id, color, qty) {
 
 //// REGEXs
 // no regex for addresses, "required" attribute speaks for himself
-// valeurs des champs en variables const
+// variables values for the form :
 const prenom = document.getElementById("firstName");
 const nom = document.getElementById("lastName");
 const ville = document.getElementById("city");
@@ -84,10 +84,9 @@ function validateEmail(mail) {
   }
 }
 // simple RegEx for names : accepted characters by RegEx
-// const regexName = /[a-z]\D/gi;
+
 const regexName = /^[a-z][a-z '-.,]{1,31}$|^$/i;
 
-// const regexName = /./;
 // first name
 const firstNameErrorMsg = document.getElementById("firstNameErrorMsg");
 function validateFirstName(prenom) {

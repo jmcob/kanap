@@ -59,7 +59,7 @@ const postUrl = "http://localhost:3000/api/products/order/";
 const orderButton = document.getElementById("order");
 orderButton.addEventListener("click", (e) => {
   e.preventDefault(); //prevent default form button action
-  // prevent fetch to post without REGEXs permission :
+  // then below, prevent fetch to post without REGEXs permission :
   let email = validateEmail(mail.value);
   let firstName = validateFirstName(prenom.value);
   let lastName = validateLastName(nom.value);
