@@ -3,7 +3,7 @@ const cartSection = document.getElementById("cart__items");
 const cartOrder = document.getElementsByClassName("cart__order");
 const cartPrice = document.getElementsByClassName("cart__price");
 const h1 = document.getElementsByTagName("h1");
-
+const host = "https://kanapback.jmax.dev/";
 // fetch function gets the data from backend to fill the properties of the kanaps on cart.html page
 function fetchIdData() {
   let items = getCart();
@@ -13,7 +13,7 @@ function fetchIdData() {
     for (let i = 0; i < items.length; i++) {
       let id = items[i][0];
       let color = items[i][1];
-      let url = "http://localhost:3000/api/products/" + id;
+      let url = host + "api/products/" + id;
       fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -55,7 +55,7 @@ function fetchIdData() {
 }
 fetchIdData();
 // anonymous function with addEventListener that fetches 'postUrl' et posts 'contact' and 'products' to retrieve the confirmation page URL
-const postUrl = "http://localhost:3000/api/products/order/";
+const postUrl = host + "api/products/order/";
 const orderButton = document.getElementById("order");
 orderButton.addEventListener("click", (e) => {
   e.preventDefault(); //prevent default form button action

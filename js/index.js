@@ -1,6 +1,8 @@
 // Fetching data from backend, displaying kanaps on front page
+const host = "https://kanapback.jmax.dev/";
+const getUrl = host + "api/products/";
 let cardsFetch = function () {
-  fetch("http://localhost:3000/api/products")
+  fetch(getUrl)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
