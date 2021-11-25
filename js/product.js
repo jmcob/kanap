@@ -60,4 +60,5 @@ toCartBtn.addEventListener("click", () => {
   let qty = parseInt(qtyValue());
   let color = colorValue();
   add2Cart(id, color, qty);
+  window.location.href = "./cart.html";
 });
