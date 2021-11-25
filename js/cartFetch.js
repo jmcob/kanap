@@ -3,7 +3,7 @@ const cartSection = document.getElementById("cart__items");
 const cartOrder = document.getElementsByClassName("cart__order");
 const cartPrice = document.getElementsByClassName("cart__price");
 const h1 = document.getElementsByTagName("h1");
-const host = "https://kanapback.jmax.dev/";
+const host = "https://kanapjmax.herokuapp.com/";
 // fetch function gets the data from backend to fill the properties of the kanaps on cart.html page
 function fetchIdData() {
   let items = getCart();

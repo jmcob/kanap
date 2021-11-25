@@ -1,5 +1,5 @@
 // Fetching data from backend, displaying kanaps on front page
-const host = "https://kanapback.jmax.dev/";
+const host = "https://kanapjmax.herokuapp.com/";
 const getUrl = host + "api/products/";
 let cardsFetch = function () {
   fetch(getUrl)

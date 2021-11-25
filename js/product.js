@@ -4,7 +4,7 @@
 const str = window.location;
 const url = new URL(str);
 const id = url.searchParams.get("id");
-const host = "https://kanapback.jmax.dev/";
+const host = "https://kanapjmax.herokuapp.com/";
 const objectURL = host + "api/products/" + id;
 
 /////////
