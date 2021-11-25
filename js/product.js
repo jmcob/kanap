@@ -4,7 +4,8 @@
 const str = window.location;
 const url = new URL(str);
 const id = url.searchParams.get("id");
-const objectURL = "http://localhost:3000/api/products/" + id;
+const host = "https://kanapjmax.herokuapp.com/";
+const objectURL = host + "api/products/" + id;
 
 /////////
 // Fetching data from backend & constructing DOM
